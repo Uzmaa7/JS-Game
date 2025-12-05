@@ -27,6 +27,13 @@ const blocks = [];
 let snake = [{x: 1, y: 3}];
 let food = {x:Math.floor(Math.random()*rows), y:Math.floor(Math.random()*cols)}
 
+
+
+let intervalId = null;
+let timerIntervalId = null;
+
+
+
 let direction = 'right';
 
 let highScore = localStorage.getItem("highScore") || 0;
@@ -116,10 +123,6 @@ function render(){
 }
 
 
-
-
-
-// let intervalId = null;
 // intervalId = setInterval(() => {
 //     render();
 // },300);
@@ -131,6 +134,19 @@ startButton.addEventListener("click", ()=>{
     intervalId = setInterval(() => {
         render();
     },300);
+
+    timerIntervalId = setInterval(() => {
+        let [min, sec] = time.split("-").map(Number)
+
+        if(sec == 59){
+            min += 1;
+            sec = 0;
+        }else{
+            sec+=1;
+        }
+        time = `${min}-${sec}`;
+        timeElement.innerText = time;
+    },1000);
 })
 
 restartButton.addEventListener("click", restartGame)
@@ -153,7 +169,14 @@ function restartGame(){
     score = 0;
     time = 0;
 
+    scoreElement.innerText = score;
+    timeElement.innerText = time;
+    highscoreElement.innerText = highScore;
+
 }
+
+
+
 
 addEventListener("keydown", (e) =>  {
     // console.log(e.key)
