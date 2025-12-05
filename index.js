@@ -34,7 +34,7 @@ function render(){
     snake.forEach(segment => {
         // console.log(segment)
        
-        console.log( blocks[ `${segment.x}-${segment.y}` ])
+        blocks[ `${segment.x}-${segment.y}` ].classList.add("fill");
 
     })
 }
