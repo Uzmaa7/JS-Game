@@ -29,9 +29,11 @@ let food = {x:Math.floor(Math.random()*rows), y:Math.floor(Math.random()*cols)}
 
 let direction = 'right';
 
-let highScore = 0;
+let highScore = localStorage.getItem("highScore") || 0;
 let score = 0;
 let time = `00-00`;
+
+highscoreElement.innerText = highScore;
 
 for(let row = 0;  row < rows; row++){
     for(let col = 0;  col < cols; col++){
@@ -90,6 +92,11 @@ function render(){
 
         score += 10;
         scoreElement.innerText = score;
+
+        if(score > highScore){
+            highScore = score;
+            localStorage.setItem("highScore", highScore.toString());
+        }
     }
 
 
@@ -142,6 +149,9 @@ function restartGame(){
     intervalId = setInterval(() => {
         render();
     },300);
+
+    score = 0;
+    time = 0;
 
 }
 
