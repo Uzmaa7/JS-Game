@@ -1,4 +1,7 @@
 const board = document.querySelector('.board');
+const startButton = document.querySelector(".btn-start");
+const modal = document.querySelector(".modal");
+
 
 const blockHeight = 50;
 const blockWidth = 50;
@@ -90,14 +93,19 @@ function render(){
 
 
 
-let intervalId = null;
-intervalId = setInterval(() => {
-    render();
-},300);
+// let intervalId = null;
+// intervalId = setInterval(() => {
+//     render();
+// },300);
 
 
 
-
+startButton.addEventListener("click", ()=>{
+    modal.style.display = "none";
+    intervalId = setInterval(() => {
+        render();
+    },300);
+})
 
 addEventListener("keydown", (e) =>  {
     // console.log(e.key)
