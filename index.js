@@ -31,6 +31,8 @@ for(let row = 0;  row < rows; row++){
     }
 }
 
+
+
 function render(){
     let head = null;
 
@@ -58,7 +60,14 @@ function render(){
 
 
     if(head.x == food.x && head.y == food.y){
-        //food consume ho jay + snake length inc ho jay
+        //food consume ho jay + snake length inc. ho jay
+        blocks[ `${food.x}-${food.y}` ].classList.remove("food");
+
+        food = {x:Math.floor(Math.random()*rows), y:Math.floor(Math.random()*cols)};
+        blocks[ `${food.x}-${food.y}` ].classList.add("food");
+
+
+        snake.unshift(head);
     }
 
 
@@ -77,10 +86,17 @@ function render(){
     })
 }
 
+
+
+
+
 let intervalId = null;
 intervalId = setInterval(() => {
     render();
 },300);
+
+
+
 
 
 addEventListener("keydown", (e) =>  {
